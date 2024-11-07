@@ -34,10 +34,55 @@ begin
     
     clk <= not clk after periodo_clk/2; --dá pra usar o finished também
   process
-  begin
+  begin   
+    enable <= std_logic := '0';
+    reset <= std_logic := '0';
     mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
     mem_B <= std_logic_vector(to_unsigned(1, mem_B'length));
-    reset <= std_logic := '0';
+    wait for periodo_clk;
+    assert(sad_value = "00000000000000")
+    report "Falha no primeiro teste" severity error;
 
-  
-  
+    enable <= std_logic := '1';
+    reset <= std_logic := '0';
+    mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
+    mem_B <= std_logic_vector(to_unsigned(1, mem_B'length));
+    wait for periodo_clk;
+    assert(sad_value = "00000011111111")
+    report "Falha no segundo teste" severity error;
+
+    enable <= std_logic := '1';
+    reset <= std_logic := '1';
+    mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
+    mem_B <= std_logic_vector(to_unsigned(1, mem_B'length));
+    wait for periodo_clk;
+    assert(sad_value = "00000000000000")
+    report "Falha no terceiro teste" severity error;
+    
+    enable <= std_logic := '1';
+    reset <= std_logic := '0';
+    mem_A <= std_logic_vector(to_unsigned(1, mem_A'length));
+    mem_B <= std_logic_vector(to_unsigned(0, mem_B'length));
+    wait for periodo_clk;
+    assert(sad_value = "00000011111111")
+    report "Falha no quarto teste" severity error;
+
+    enable <= std_logic := '1';
+    reset <= std_logic := '0';
+    mem_A <= std_logic_vector(to_unsigned(1, mem_A'length));
+    mem_B <= std_logic_vector(to_unsigned(1, mem_B'length));
+    wait for periodo_clk;
+    assert(sad_value = "00000111111111")
+    report "Falha no quinto teste" severity error;
+
+    enable <= std_logic := '1';
+    reset <= std_logic := '0';
+    mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
+    mem_B <= std_logic_vector(to_unsigned(0, mem_B'length));
+    wait for periodo_clk;
+    assert(sad_value = "00000111111111")
+    report "Falha no sexto teste" severity error;
+    
+    wait;
+  end process;
+end tb;
