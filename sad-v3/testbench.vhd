@@ -26,5 +26,13 @@ begin
     generic map(B => b_bits,
                 N => n_bits,
                 P => p_bits);
-    port map(
+    port map(clk => clk, 
+             enable => enable, 
+             reset => reset, 
+             sample_ori => mem_A, 
+             sample_can => mem_B, 
+             read_mem => read_mem, 
+             done => done,
+             address => address, 
+             sad_value => sad_value);
                 
