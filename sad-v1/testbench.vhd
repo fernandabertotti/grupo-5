@@ -39,7 +39,7 @@ begin
     reset <= std_logic := '0';
     mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
     mem_B <= std_logic_vector(to_unsigned(1, mem_B'length));
-    wait for periodo_clk;
+    wait for periodo_clk; --dúvida
     assert(sad_value = "00000000000000")
     report "Falha no primeiro teste" severity error;
 
