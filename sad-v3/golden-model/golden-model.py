@@ -1,5 +1,6 @@
 import random
-#gera valores
+#gera valores aleatórios de 8 bits (memória)
+#50 pares de blocos 8x8
 quantidade_numeros = 50
 tamanho = 8
 with open("estimulos.dat","w") as file:
