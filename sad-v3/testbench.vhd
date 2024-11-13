@@ -36,26 +36,30 @@ begin
     file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
     variable linha_de_estimulos: line;
     variable espaco: character;
-    variable valor_de_entrada: bit_vector(3 downto 0);
-    variable valor_de_saida: bit_vector(6 downto 0);
+    variable valor_de_memA: bit_vector(b_bits*p_bits -1 downto 0);
+    variable valor_de_memB: bit_vector(b_bits*p_bits -1 downto 0);
+    variable valor_de_saida: bit_vector(b_bits + positive(ceil(log2(real(n_bits))))-1 downto 0);
     begin
 
     while not endfile(arquivo_de_estimulos) loop
-    -- read inputs
-   readline(arquivo_de_estimulos, linha_de_estimulos);
-   read(linha_de_estimulos, valor_de_entrada);
-   input <= to_stdlogicvector (valor_de_entrada);
-   read(linha_de_estimulos, espaco);
-   read(linha_de_estimulos, valor_de_saida);
-   wait for passo;
-   assert (output = to_stdlogicvector(valor_de_saida))
-   report  "Falha na simulação"
-   severity error;
-   end loop;
+     -- read inputs
+     readline(arquivo_de_estimulos, linha_de_estimulos);
+     read(linha_de_estimulos, valor_de_memA);
+     sample_ori <= to_stdlogicvector (valor_de_memA);
+     read(linha_de_estimulos, espaco);
+     read(linha_de_estimulos, valor_de_memB);
+     sample_can <= to_stdlogicvector (valor_de_memB);
+     read(linha_de_estimulos, espaco);
+     read(linha_de_estimulos, valor_de_saida);
+     wait for passo;
+     assert (sad_value = to_stdlogicvector(valor_de_saida))
+     report  "Falha na simulação"
+     severity error;
+     end loop;
 
-   wait for passo;
-   assert false report "Test done." severity note;
-   wait;
+     wait for passo;
+     assert false report "Test done." severity note;
+     wait;
  end process;
 end tb;
                 
