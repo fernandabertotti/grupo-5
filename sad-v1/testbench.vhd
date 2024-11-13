@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity sadv1-tb is
-end sadv1-tb;
+entity testbench is
+end testbench;
 
-architecture tb of sadv1-tb is
+architecture tb of testbench is
   CONSTANT b_bits : natural := 8;
   CONSTANT n_bits : natural := 64;
   CONSTANT p_bits : natural := 1;
