@@ -5,10 +5,10 @@ use ieee.math_real.all;
 use ieee.std_logic_textio.all;
 use std.textio.all;
 
-entity sadv3-tb is
-end sadv3-tb;
+entity testbench is
+end testbench;
 
-architecture tb of sadv3-tb is
+architecture tb of testbench is
 
   CONSTANT b_bits : natural := 8;
   CONSTANT n_bits : natural := 64;
@@ -23,9 +23,6 @@ architecture tb of sadv3-tb is
 begin
 
   DUV : entity work.sad(arch)
-    generic map(B => b_bits,
-                N => n_bits,
-                P => p_bits);
     port map(clk => clk, 
              enable => enable, 
              reset => reset, 
@@ -35,4 +32,30 @@ begin
              done => done,
              address => address, 
              sad_value => sad_value);
+  stim: process is
+    file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
+    variable linha_de_estimulos: line;
+    variable espaco: character;
+    variable valor_de_entrada: bit_vector(3 downto 0);
+    variable valor_de_saida: bit_vector(6 downto 0);
+    begin
+
+    while not endfile(arquivo_de_estimulos) loop
+    -- read inputs
+   readline(arquivo_de_estimulos, linha_de_estimulos);
+   read(linha_de_estimulos, valor_de_entrada);
+   input <= to_stdlogicvector (valor_de_entrada);
+   read(linha_de_estimulos, espaco);
+   read(linha_de_estimulos, valor_de_saida);
+   wait for passo;
+   assert (output = to_stdlogicvector(valor_de_saida))
+   report  "Falha na simulação"
+   severity error;
+   end loop;
+
+   wait for passo;
+   assert false report "Test done." severity note;
+   wait;
+ end process;
+end tb;
                 
