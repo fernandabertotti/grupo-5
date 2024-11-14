@@ -1,9 +1,3 @@
-#64 colunas de 8 bits cada (16 leituras da memória para pegar 4 amostras de 8 bits de cada mem)
-#50 por coluna
-#+1 coluna para sad_value
-
-
-
 import random
 
 linhas = 50
