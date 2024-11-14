@@ -54,13 +54,13 @@ begin
          end loop;
       
       read(linha_de_estimulos, valor_de_saida); --leitura do sad_value 
-      wait for passo;
+      wait for periodo_clk;
       assert (sad_value = to_stdlogicvector(valor_de_saida))
       report  "Falha na simulação"
       severity error;
       end loop;
 
-     wait for passo;
+     wait for periodo_clk;
      assert false report "Test done." severity note;
      wait;
  end process;
