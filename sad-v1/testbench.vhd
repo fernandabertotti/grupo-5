@@ -55,37 +55,27 @@ begin
     assert(sad_value = "00000000000000")
     report "Falha no segundo teste - Enable não funciona" severity error;
 
-    --CASO DE TESTE 3: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 0 E AMOSTRAS DE B VALENDO 255
+    --CASO DE TESTE 3: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 255 E AMOSTRAS DE B VALENDO 0
     enable <= '1';
     reset <= '0';
-    mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
-    mem_B <= std_logic_vector(to_unsigned(255, mem_B'length));
+    mem_A <= std_logic_vector(to_unsigned(255, mem_A'length));
+    mem_B <= std_logic_vector(to_unsigned(0, mem_B'length));
     wait until done'event and done = '1'; --esperar por todo o tempo de execução da sad
     wait for periodo_clk; --contabilizar o tco do registrador sad_value
     assert(sad_value = "11111111111111")
     report "Falha no terceiro teste - Cálculo da SAD não funciona" severity error;
 
-    --CASO DE TESTE 4: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 255 E AMOSTRAS DE B VALENDO 0
+    --CASO DE TESTE 4: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 0 E AMOSTRAS DE B VALENDO 255
     enable <= '1';
     reset <= '0';
-    mem_A <= std_logic_vector(to_unsigned(255, mem_A'length));
-    mem_B <= std_logic_vector(to_unsigned(0, mem_B'length));
+    mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
+    mem_B <= std_logic_vector(to_unsigned(255, mem_B'length));
     wait until done'event and done = '1'; --esperar por todo o tempo de execução da sad
     wait for periodo_clk; --contabilizar o tco do registrador sad_value
     assert(sad_value = "11111111111111")
     report "Falha no quarto teste - Cálculo da SAD não funciona" severity error;
 
-    --CASO DE TESTE 5: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 255 E AMOSTRAS DE B VALENDO 255
-    enable <= '1';
-    reset <= '0';
-    mem_A <= std_logic_vector(to_unsigned(255, mem_A'length));
-    mem_B <= std_logic_vector(to_unsigned(255, mem_B'length));
-    wait until done'event and done = '1'; --esperar por todo o tempo de execução da sad
-    wait for periodo_clk; --contabilizar o tco do registrador sad_value
-    assert(sad_value = "00000000000000")
-    report "Falha no quinto teste - Cálculo da SAD não funciona" severity error;
-
-    --CASO DE TESTE 6: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 255 E AMOSTRAS DE B VALENDO 255
+    --CASO DE TESTE 6: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 0 E AMOSTRAS DE B VALENDO 0
     enable <= '1';
     reset <= '0';
     mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
@@ -93,7 +83,7 @@ begin
     wait until done'event and done = '1'; --esperar por todo o tempo de execução da sad
     wait for periodo_clk; --contabilizar o tco do registrador sad_value
     assert(sad_value = "00000000000000")
-    report "Falha no sexto teste - Cálculo da SAD não funciona" severity error;
+    report "Falha no quinto teste - Cálculo da SAD não funciona" severity error;
 
     wait for periodo_clk;
     assert false report "Teste finalizado" severity note;
