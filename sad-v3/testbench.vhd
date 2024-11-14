@@ -42,20 +42,23 @@ begin
     begin
 
     while not endfile(arquivo_de_estimulos) loop
-     -- read inputs
-     readline(arquivo_de_estimulos, linha_de_estimulos);
-     read(linha_de_estimulos, valor_de_memA);
-     sample_ori <= to_stdlogicvector (valor_de_memA);
-     read(linha_de_estimulos, espaco);
-     read(linha_de_estimulos, valor_de_memB);
-     sample_can <= to_stdlogicvector (valor_de_memB);
-     read(linha_de_estimulos, espaco);
-     read(linha_de_estimulos, valor_de_saida);
-     wait for passo;
-     assert (sad_value = to_stdlogicvector(valor_de_saida))
-     report  "Falha na simulação"
-     severity error;
-     end loop;
+      readline(arquivo_de_estimulos, linha_de_estimulos);
+      for i in range 0 to 63 loop --leitura dos 64 valores de uma linha
+         -- read inputs
+         read(linha_de_estimulos, valor_de_memA);
+         sample_ori <= to_stdlogicvector (valor_de_memA);
+         read(linha_de_estimulos, espaco);
+         read(linha_de_estimulos, valor_de_memB);
+         sample_can <= to_stdlogicvector (valor_de_memB); 
+         read(linha_de_estimulos, espaco);
+         end loop;
+      
+      read(linha_de_estimulos, valor_de_saida); --leitura do sad_value 
+      wait for passo;
+      assert (sad_value = to_stdlogicvector(valor_de_saida))
+      report  "Falha na simulação"
+      severity error;
+      end loop;
 
      wait for passo;
      assert false report "Test done." severity note;
