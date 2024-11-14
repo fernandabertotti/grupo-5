@@ -33,7 +33,7 @@ begin
              address => address, 
              sad_value => sad_value);
   stim: process is
-    file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
+    file arquivo_de_estimulos : text open read_mode is "grupo-5/sad-v3/estimulos.dat";
     variable linha_de_estimulos: line;
     variable espaco: character;
     variable valor_de_memA: bit_vector(b_bits*p_bits -1 downto 0);
