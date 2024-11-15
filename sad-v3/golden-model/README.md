@@ -8,7 +8,7 @@ O código executa os seguintes passos:
 1. Determina os valores das variáveis `linhas` (representa o número de linhas do arquivo), `numero_colunas` (representa o número de valores que cada memória possui em uma linha) e `numero_bits` (representa o número de bits das entradas). Dessa forma, basta alterar o valor das variáveis para determinar o formato das memórias, sem mexer no restante do código.
 2. Gera valores decimais aleatórios para `mem_A` e `mem_B` e os armazena em uma lista, `line_data`, no formato binário com o número correto de bits, utilizando as funções bin() e zfill(numero_bits). A lista guarda os valores de uma linha. 
 3. Calcula a diferença absoluta entre `mem_A`e `mem_B` e adiciona ao valor acumulado da SAD, `sad_value`, o qual é armazenado ao final da lista `line_data`.
-4. Escreve todos os valores, separados por espaço, de `line_data` no arquivo de saída `estimulos.dat`.
+4. Escreve todos os valores, separados por espaço, de `line_data` no arquivo de saída `estimulos.dat` e repete os passos 2,3 e 4 até o final do número de linhas definido no passo 1.
 
 ## Como Executar
 
