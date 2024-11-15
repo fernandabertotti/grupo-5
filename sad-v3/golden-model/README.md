@@ -12,7 +12,7 @@ O código executa os seguintes passos:
 
 ## Como Executar
 
-Para executar o arquivo `golden-model.py` basta:
+Para executar o arquivo `golden-model.py`, basta:
 1. Fazer o download do arquivo `.zip` contendo o projeto.
 2. Escolher ou criar uma pasta de destino e extrair o arquivo `.zip` nela.
 3. Abrir um terminal e navegar até o diretório onde você extraiu o arquivo `.zip` utilizando o seguinte comando: "cd caminho/para/a/pasta".
