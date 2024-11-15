@@ -1,4 +1,4 @@
-# Gerador de Arquivo de Estímulos (estimulos.dat)
+# Gerador de Arquivo de Estímulos 
 
 O script em Python `golden-model.py` gera um arquivo de estímulos, `estimulos.dat`, que contém valores aleatórios para as entradas e o cálculo da SAD para as saídas.
 
