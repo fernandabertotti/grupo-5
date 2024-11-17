@@ -1,18 +1,16 @@
-LIBRARY IEEE;
-USE IEEE.Std_Logic_1164.ALL;
+library IEEE;
+use IEEE.Std_Logic_1164.all;
 
-ENTITY mux2x1 IS
-    GENERIC (N : POSITIVE); --valor será definido na instanciação do componente
-    PORT (
-        F1 : IN std_logic_vector(N - 1 DOWNTO 0);
-        F2 : IN std_logic_vector(N - 1 DOWNTO 0);
-        sel : IN std_logic;
-        F : OUT std_logic_vector(N - 1 DOWNTO 0)
-    );
-END mux2x1;
+entity mux2x1 is
+generic (N : integer); --valor será definido na instanciação do componente
+port (F1: in  std_logic_vector(N-1 downto 0);
+	 F2: in  std_logic_vector(N-1 downto 0);
+	 sel: in  std_logic;
+	 F: out  std_logic_vector(N-1 downto 0));
+end mux2x1;
 
-ARCHITECTURE arch OF mux2x1 IS
-BEGIN
-    F <= F1 WHEN sel = '0' ELSE --uso da estrutura de seleção condicional when else
+architecture arch of mux2x1 is
+begin
+F <= F1 when sel = '0' else --uso da estrutura de seleção condicional when else
          F2;
-END arch;
+end arch;
