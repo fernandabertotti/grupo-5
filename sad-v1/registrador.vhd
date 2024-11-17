@@ -1,23 +1,22 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY registrador IS
-    GENERIC (N : INTEGER); --o valor do generic será definido na instanciação desse componente
-    PORT (
-        clk, rst, carga : IN std_logic;
-        D : IN std_logic_vector(N - 1 DOWNTO 0);
-        Q : OUT std_logic_vector(N - 1 DOWNTO 0)
+entity registrador is
+    generic (N : integer); 
+    clk, rst, carga : in std_logic;
+    D: in std_logic_vector(N-1 downto 0);
+    Q: out std_logic_vector(N-1 downto 0)
     );
-END registrador;
+end registrador;
 
-ARCHITECTURE arch OF registrador IS
-BEGIN
-    PROCESS (rst, clk)
-    BEGIN
-        IF (rst = '1') THEN
-            Q <= (OTHERS => '0'); --others é uma palavra-chave para representar todos os valores de índices que não foram especificados
-        ELSIF (rising_edge(clk) AND carga = '1') THEN
+architecture arch of registrador is
+begin
+    process (rst,clk)
+    begin
+        if (rst = '1') then 
+            Q <= (others => '0'); --others é uma palavra-chave para representar todos os valores de índices que não foram especificados
+        elsif (rising_edge(clk) and carga = '1') then
             Q <= D;
-        END IF;
-    END PROCESS;
-END arch;
+        end if;
+    end process;
+end arch;
