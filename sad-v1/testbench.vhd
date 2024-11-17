@@ -78,7 +78,7 @@ begin
     assert(sad_value = "11111111111111")
     report "Falha no quarto teste - Cálculo da SAD não funciona" severity error;
 
-    --CASO DE TESTE 6: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 0 E AMOSTRAS DE B VALENDO 0
+    --CASO DE TESTE 5: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 0 E AMOSTRAS DE B VALENDO 0
     enable <= '1';
     reset <= '0';
     mem_A <= std_logic_vector(to_unsigned(0, mem_A'length));
