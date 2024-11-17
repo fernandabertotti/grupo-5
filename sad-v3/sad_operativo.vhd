@@ -52,7 +52,7 @@ BEGIN
             rst => rst, 
             carga => ci, 
             sel_mux => zi, 
-            valor_para_somar => (OTHERS => '1'), 
+            valor_para_somar =>  std_logic_vector(to_unsigned(1, out_acc_cont'length)),
             acumulado => out_acc_cont
         );
 
