@@ -17,11 +17,11 @@ architecture tb of testbench is
   signal sad_value : std_logic_vector (b_bits + POSITIVE(ceil(real(log(real(n_bits)) / log(2.0)))) - 1 downto 0); --output
   signal finished : std_logic := '0';
 
-  CONSTANT periodo_clk : TIME := 10 ns; --dúvida sobre o período de clk
+  CONSTANT periodo_clk : TIME := 10 ns; 
 
 begin
 
-  DUV: entity work.sad(arch) --tirei a arquitetura porque nos slides não tinha
+  DUV: entity work.sad(arch)
     port map(clk => clk, 
              enable => enable, 
              reset => reset, 
@@ -32,7 +32,7 @@ begin
              sad_value => sad_value, 
              done => done );
     
-    clk <= not clk after periodo_clk/2 when finished /= '1' else '0'; --dá pra usar o finished também
+    clk <= not clk after periodo_clk/2 when finished /= '1' else '0'; 
     
   process
   begin   
