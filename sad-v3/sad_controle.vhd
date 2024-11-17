@@ -21,18 +21,18 @@ BEGIN
         END IF;
     END PROCESS;
 
-    PROCESS (enable, menor) --lógica de próximo estado e saídas (verificar se dont care funciona no quartus)
+    PROCESS (enable, menor, estado_atual) --lógica de próximo estado e saídas (verificar se dont care funciona no quartus)
         BEGIN
             CASE estado_atual IS
  
                 WHEN s0 => 
                     read_mem <= '0';
                     done <= '1';
-                    zi <= ' - ';
+                    zi <= '-';
                     ci <= '0';
                     cpA <= '0';
                     cpB <= '0';
-                    zsoma <= ' - ';
+                    zsoma <= '-';
                     csoma <= '0';
                     csad_reg <= '0';
  
@@ -57,11 +57,11 @@ BEGIN
                 WHEN s2 => 
                     read_mem <= '0';
                     done <= '0';
-                    zi <= ' - ';
+                    zi <= '-';
                     ci <= '0';
                     cpA <= '0';
                     cpB <= '0';
-                    zsoma <= ' - ';
+                    zsoma <= '-';
                     csoma <= '0';
                     csad_reg <= '0';
                     IF menor = '1' THEN
@@ -73,7 +73,7 @@ BEGIN
                 WHEN s3 => 
                     read_mem <= '1';
                     done <= '0';
-                    zi <= ' - ';
+                    zi <= '-';
                     ci <= '0';
                     cpA <= '1';
                     cpB <= '1';
@@ -97,11 +97,11 @@ BEGIN
                 WHEN s5 => 
                     read_mem <= '0';
                     done <= '0';
-                    zi <= ' - ';
+                    zi <= '-';
                     ci <= '0';
                     cpA <= '0';
                     cpB <= '0';
-                    zsoma <= ' - ';
+                    zsoma <= '-';
                     csoma <= '0';
                     csad_reg <= '1';
                     proximo_estado <= s0;
