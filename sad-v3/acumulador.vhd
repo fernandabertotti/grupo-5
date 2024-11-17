@@ -1,52 +1,49 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
-USE ieee.numeric_std.ALL;
+entity acumulador is
+generic (N : positive);
+port(
+	clk, rst, carga, sel_mux: in std_logic; --entradas dos registradores e seletor do mux
+	valor_para_somar: in std_logic_vector(N-1 downto 0); --entrada do acumulador
+	acumulado: out std_logic_vector(N-1 downto 0) --saída do acumulador
+);
+end acumulador;
 
-ENTITY acumulador IS
-    GENERIC (N : POSITIVE);
-    PORT (
-        clk, rst, carga, sel_mux : IN std_logic; --entradas dos registradores e seletor do mux
-        valor_para_somar : IN std_logic_vector(N - 1 DOWNTO 0); --entrada do acumulador
-        acumulado : OUT std_logic_vector(N - 1 DOWNTO 0) --saída do acumulador
-    );
-END acumulador;
+architecture arch of acumulador is
+  signal mux_in0: std_logic_vector(N-1 downto 0); -- entrada do multiplexador quando seletor é 0
+  signal mux_out: std_logic_vector(N-1 downto 0); -- saída do multiplexador
+  signal reg_in: std_logic_vector(N-1 downto 0); -- entrada do registrador
+  signal valor_ja_acumulado: std_logic_vector(N-1 downto 0); -- saída do registrador
+  signal adder_out: std_logic_vector(N-1 downto 0); -- saída do somador
 
-ARCHITECTURE arch OF acumulador IS
-    SIGNAL mux_in0 : std_logic_vector(N - 1 DOWNTO 0); -- entrada do multiplexador quando seletor é 0
-    SIGNAL mux_out : std_logic_vector(N - 1 DOWNTO 0); -- saída do multiplexador
-    SIGNAL reg_in : std_logic_vector(N - 1 DOWNTO 0); -- entrada do registrador
-    SIGNAL valor_ja_acumulado : std_logic_vector(N - 1 DOWNTO 0); -- saída do registrador
-    SIGNAL adder_out : std_logic_vector(N - 1 DOWNTO 0); -- saída do somador
+begin
+	MUX : entity work.mux2x1(arch)
+		generic map (N => N)
+		port map(
+  			F1 => adder_out,
+  			F2 => (others => '0'),
+  			sel => sel_mux,
+  			F => mux_out
+			);
 
-BEGIN
-    MUX : ENTITY work.mux2x1(arch)
-            GENERIC MAP(N => N)
-        PORT MAP(
-            F1 => adder_out, 
-            F2 => (OTHERS => '0'), 
-            sel => sel_mux, 
-            F => mux_out
-        );
+	REG: entity work.registrador(arch)
+		generic map (N => N)
+		port map(
+			clk => clk,
+			rst => rst,
+			carga => carga,
+			D => mux_out,
+			Q => valor_ja_acumulado); 
 
-            REG : ENTITY work.registrador(arch)
-                    GENERIC MAP(N => N)
-                PORT MAP(
-                    clk => clk, 
-                    rst => rst, 
-                    carga => carga, 
-                    D => mux_out, 
-                    Q => valor_ja_acumulado
-                );
+	SOMADOR: entity work.adder_unsigned(arch)
+		generic map (N => N)
+		port map(
+			A => unsigned(valor_para_somar),
+			B => unsigned(valor_ja_acumulado),
+			result => adder_out);
 
-                    SOMADOR : ENTITY work.adder_unsigned(arch)
-                            GENERIC MAP(N => N)
-                        PORT MAP(
-                            A => unsigned(valor_para_somar), 
-                            B => unsigned(valor_ja_acumulado), 
-                            result => adder_out
-                        );
+	acumulado <= valor_ja_acumulado; 
 
-                            acumulado <= valor_ja_acumulado;
-
-END arch;
+end arch;
