@@ -21,10 +21,7 @@ architecture tb of testbench is
 
 begin
 
-  DUV: entity work.sad --tirei a arquitetura porque nos slides não tinha
-    generic map(B => b_bits, --incluí generic map pra ver se muda algo
-                N => n_bits,
-                P = p_bits)
+  DUV: entity work.sad(arch) --tirei a arquitetura porque nos slides não tinha
     port map(clk => clk, 
              enable => enable, 
              reset => reset, 
