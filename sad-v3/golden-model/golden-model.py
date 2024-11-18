@@ -22,11 +22,23 @@ with open("estimulos.dat", "w") as file:
             # Adiciona ao valor acumulado de SAD
             sad_value += absolute
 
-        # Adiciona o valor de sad_value convertido para binário de 16 bits ao final da linha
-        line_data.append(bin(sad_value)[2:].zfill(14))
+        # Armazena as variáveis de 32 bits resultantes
+        vars_32bits = []  # Lista para armazenar as variáveis de 32 bits geradas
 
-        # Escreve todos os valores da linha no arquivo, separados por espaços
-        file.write(" ".join(line_data) + "\n")
+        # Processa line_data em blocos de 8 valores
+        for k in range(0, len(line_data) -1, 8): 
+            bloco = line_data[k:k+8]  # Seleciona um bloco de 8 valores
 
-        
+            # Concatena valores de índices pares e ímpares
+            var_par = "".join(bloco[idx] for idx in range(0, 8, 2))  # Índices pares
+            var_impar = "".join(bloco[idx] for idx in range(1, 8, 2))  # Índices ímpares
 
+            # Adiciona as variáveis concatenadas à lista
+            vars_32bits.append(var_par)
+            vars_32bits.append(var_impar)
+
+        # Adiciona o valor de sad_value convertido para binário de 14 bits ao final
+        vars_32bits.append(bin(sad_value)[2:].zfill(14))
+
+        # Escreve todos os valores processados no arquivo, separados por espaços
+        file.write(" ".join(vars_32bits) + "\n")
