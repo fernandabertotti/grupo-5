@@ -15,16 +15,20 @@ Tendo em vista os erros identificados na entrega anterior, foram desenvolvidas a
 
 - Retirada do arquivo subtractor_signed e utilização da função abs da biblioteca numeric_std para realização das diferenças absolutas com um bit a mais nas entradas no módulo absoluteDiff;
 - Inclusão do estado_atual na lista de sensibilidade do process do registrador, para gerar a lógica de transição entre os estados;
-- Adequação do valor somado no registrador cont para 1, com uso da função to_unsigned, no bloco operativo.
+- Adequação do valor somado no acumulador de cont para 1, com uso da função to_unsigned, no bloco operativo.
 
 O efeito dessas mudanças consta nos dados do arquivo relatorio.json, que descreve um número menor, se comparado à entrega anterior, nos campos "total combinational funtions" e "Fmax".
 
 #### Simulação
 
 Para a simulação, foi elaborado um testbench com os cenários previamente testados no arquivo estimulos.do, visando cobrir testes do reset, enable e cálculo da SAD. 
-Contudo, não foi possível verificar o funcionamento do circuito a partir do testbench, pois no ModelSim houve um "Error loading design", conforme mostra a imagem abaixo.
+Inicialmente, não foi possível verificar o funcionamento do circuito a partir do testbench, pois no ModelSim houve um "Error loading design", conforme mostra a imagem abaixo.
 
 ![Mensagem de erro no ModelSim](https://github.com/user-attachments/assets/40944da7-74e4-46df-b3da-9c5f2b703bdf)
+
+Conforme orientação do professor, ao retirar o nome da arquitetura de DUV no arquivo testbench, a simulação funcionou e teve como resultado o teste finalizado. Assim, evidenciamos o correto funcionamento da SAD-V1.
+
+![image](https://github.com/user-attachments/assets/8ebfb1cd-ce48-4458-956c-5ed4d35db423)
 
 ### Sum of Absolute Differences - V3 (SAD-V3)
 
