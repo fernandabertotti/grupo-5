@@ -89,9 +89,7 @@ BEGIN
                     PORT MAP(
                         a => out_pA(i), 
                         b => out_pB(i), 
-                    s => out_absdiff(i)(B - 2 DOWNTO 0)); -- saída de absdiff sem 0 concatenado
-                        --Concatenando 0 à esquerda
-                        out_absdiff(i) <= '0' & out_absdiff(i)(B - 2 DOWNTO 0);
+								s => out_absdiff(i)(B - 1 DOWNTO 0)); 
             END GENERATE;
 
             ADDERTREE : ENTITY work.adderTree(arch) --DÚVIDA: como seria possível deixar mais genérico? Para essa solução funcionar, sempre teria que ter ao menos 4 operandos
