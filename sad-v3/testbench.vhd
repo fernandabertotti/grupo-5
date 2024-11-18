@@ -42,27 +42,29 @@ begin
     variable valor_de_saida: bit_vector(b_bits + positive(ceil(log2(real(n_bits))))-1 downto 0);
     begin
 
-    while not endfile(arquivo_de_estimulos) loop
-      readline(arquivo_de_estimulos, linha_de_estimulos);
-      for i in 0 to 63 loop --leitura dos 64 valores de uma linha
-         -- read inputs
-         read(linha_de_estimulos, valor_de_memA);
-         mem_A <= to_stdlogicvector (valor_de_memA);
-         read(linha_de_estimulos, espaco);
-         read(linha_de_estimulos, valor_de_memB);
-         mem_B <= to_stdlogicvector (valor_de_memB); 
-         read(linha_de_estimulos, espaco);
-         end loop;
-      
-      read(linha_de_estimulos, valor_de_saida); --leitura do sad_value 
-      wait for periodo_clk;
-      assert (sad_value = to_stdlogicvector(valor_de_saida))
-      report  "Falha na simulação"
-      severity error;
-      end loop;
+   while not endfile(arquivo_de_estimulos) loop
+			readline(arquivo_de_estimulos, linha_de_estimulos);
+			for i in 1 to 16 loop
+				read(linha_de_estimulos, valor_mem_a);
+				read(linha_de_estimulos, espaco);
+				read(linha_de_estimulos, valor_mem_b);
+				
+				Mem_A <= to_stdlogicvector(valor_mem_a);
+				Mem_B <= to_stdlogicvector(valor_mem_b);
+				
+				wait for period*3;
+			end loop;
+			read(linha_de_estimulos, espaco);
+			read(linha_de_estimulos, valor_de_saida);
+			wait for period*3;
+			assert (SAD = to_stdlogicvector(valor_de_saida))
+			report
+			"Sad incorreta! "
+			severity error;
+		end loop;
 
-     wait for periodo_clk;
-     assert false report "Test done." severity note;
-     wait;
- end process;
+		wait for period;
+		assert false report "Test done." severity note;
+		wait;
+	end process;
 end tb;
