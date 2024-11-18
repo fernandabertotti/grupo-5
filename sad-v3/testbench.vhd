@@ -22,7 +22,7 @@ architecture tb of testbench is
   CONSTANT periodo_clk : time := 10 ns;
 begin
 
-  DUV : entity work.sad(arch)
+  DUV : entity work.sad
     port map(clk => clk, 
              enable => enable, 
              reset => reset, 
@@ -33,7 +33,7 @@ begin
              address => address, 
              sad_value => sad_value);
   stim: process is
-    file arquivo_de_estimulos : text open read_mode is "grupo-5/sad-v3/estimulos.dat";
+    file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
     variable linha_de_estimulos: line;
     variable espaco: character;
     variable valor_de_memA: bit_vector(b_bits*p_bits -1 downto 0);
@@ -43,7 +43,7 @@ begin
 
     while not endfile(arquivo_de_estimulos) loop
       readline(arquivo_de_estimulos, linha_de_estimulos);
-      for i in range 0 to 63 loop --leitura dos 64 valores de uma linha
+      for i in 0 to 63 loop --leitura dos 64 valores de uma linha
          -- read inputs
          read(linha_de_estimulos, valor_de_memA);
          sample_ori <= to_stdlogicvector (valor_de_memA);
@@ -64,5 +64,4 @@ begin
      assert false report "Test done." severity note;
      wait;
  end process;
-end tb;
-                
+end tb;             
