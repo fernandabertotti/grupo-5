@@ -30,8 +30,12 @@ Contudo, não foi possível verificar o funcionamento do circuito a partir do te
 
 #### Circuito desenvolvido
 
-A arquitetura da SAD-V3 foi adequada da mesma forma que a SAD-V1.
+A arquitetura da SAD-V3 foi adequada da mesma forma que a SAD-V1, e obteve alterações nos mesmos campos no arquivo relatorio.json.
 
 #### Simulação
 
-Para o teste da SAD-V3, foi gerado um arquivo com um conjunto aleatório de dados através da linguagem Python, a ser lido pelo testbench.
+Para o teste da SAD-V3, foi gerado um arquivo estimulos.dat com um conjunto aleatório de dados através da linguagem Python, a ser lido pelo testbench.
+No entanto, o problema "Error loading design" permaneceu no ModelSim. A figura abaixo apresenta mais detalhes além da imagem anexada para a SAD-V1. 
+![Mensagem de erro - SAD-V3](https://github.com/user-attachments/assets/056db99d-0a98-4649-a6ff-b138b8e3e600)
+
+Assim, não foi possível verificar o correto funcionamento dos testes.
