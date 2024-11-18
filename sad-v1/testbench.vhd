@@ -21,7 +21,7 @@ architecture tb of testbench is
 
 begin
 
-  DUV: entity work.sad(arch)
+  DUV: entity work.sad
     port map(clk => clk, 
              enable => enable, 
              reset => reset, 
@@ -62,7 +62,7 @@ begin
     mem_B <= std_logic_vector(to_unsigned(0, mem_B'length));
     wait until done'event and done = '1'; --esperar por todo o tempo de execução da sad
     wait for periodo_clk; --contabilizar o tco do registrador sad_value
-    assert(sad_value = "11111111111111")
+    assert(sad_value = "11111111000000")
     report "Falha no terceiro teste - Cálculo da SAD não funciona" severity error;
 
     --CASO DE TESTE 4: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 0 E AMOSTRAS DE B VALENDO 255
@@ -72,7 +72,7 @@ begin
     mem_B <= std_logic_vector(to_unsigned(255, mem_B'length));
     wait until done'event and done = '1'; --esperar por todo o tempo de execução da sad
     wait for periodo_clk; --contabilizar o tco do registrador sad_value
-    assert(sad_value = "11111111111111")
+    assert(sad_value = "11111111000000")
     report "Falha no quarto teste - Cálculo da SAD não funciona" severity error;
 
     --CASO DE TESTE 5: CÁLCULO DA SAD COM AMOSTRAS DE A VALENDO 0 E AMOSTRAS DE B VALENDO 0
