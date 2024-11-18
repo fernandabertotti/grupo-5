@@ -45,25 +45,25 @@ begin
    while not endfile(arquivo_de_estimulos) loop
 			readline(arquivo_de_estimulos, linha_de_estimulos);
 			for i in 1 to 16 loop
-				read(linha_de_estimulos, valor_mem_a);
+				read(linha_de_estimulos, valor_de_memA);
 				read(linha_de_estimulos, espaco);
-				read(linha_de_estimulos, valor_mem_b);
+				read(linha_de_estimulos, valor_de_memB);
 				
-				Mem_A <= to_stdlogicvector(valor_mem_a);
-				Mem_B <= to_stdlogicvector(valor_mem_b);
+				Mem_A <= to_stdlogicvector(valor_de_memA);
+				Mem_B <= to_stdlogicvector(valor_de_memB);
 				
-				wait for period*3;
+				wait for periodo_clk*3;
 			end loop;
 			read(linha_de_estimulos, espaco);
 			read(linha_de_estimulos, valor_de_saida);
-			wait for period*3;
-			assert (SAD = to_stdlogicvector(valor_de_saida))
+			wait for periodo_clk*3;
+			assert (sad_value = to_stdlogicvector(valor_de_saida))
 			report
 			"Sad incorreta! "
 			severity error;
 		end loop;
 
-		wait for period;
+		wait for periodo_clk;
 		assert false report "Test done." severity note;
 		wait;
 	end process;
