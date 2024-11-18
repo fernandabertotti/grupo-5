@@ -32,6 +32,7 @@ begin
              done => done,
              address => address, 
              sad_value => sad_value);
+				 
   stim: process is
     file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
     variable linha_de_estimulos: line;
@@ -46,10 +47,10 @@ begin
       for i in 0 to 63 loop --leitura dos 64 valores de uma linha
          -- read inputs
          read(linha_de_estimulos, valor_de_memA);
-         sample_ori <= to_stdlogicvector (valor_de_memA);
+         mem_A <= to_stdlogicvector (valor_de_memA);
          read(linha_de_estimulos, espaco);
          read(linha_de_estimulos, valor_de_memB);
-         sample_can <= to_stdlogicvector (valor_de_memB); 
+         mem_B <= to_stdlogicvector (valor_de_memB); 
          read(linha_de_estimulos, espaco);
          end loop;
       
@@ -64,4 +65,4 @@ begin
      assert false report "Test done." severity note;
      wait;
  end process;
-end tb;             
+end tb;
