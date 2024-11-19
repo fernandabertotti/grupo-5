@@ -1,23 +1,22 @@
-
 import numpy as np
 import random
 
-def sad_V1(lista1, lista2):
+def sad_v1(lista1, lista2):
     return np.sum(np.abs(np.array(lista1) - np.array(lista2)))
 
-def sad_V3(lista1, lista2):
-    resultado = 0
+def sad_v3(lista1, lista2):
+    valor = 0
     for i in range(len(lista1)):
-        resultado += sad_V1(lista1[i], lista2[i])
-    return resultado
+        valor += sad_v1(lista1[i], lista2[i])
+    return valor
 
 def gera_estimulo(arquivo):
-    # criacao de listas com 4 numeros aleatorios de 8 bits
+    # criação de listas com 4 números aleatórios de 8 bits
     MemA = [random.sample(range(0, 255), 4) for _ in range(16)]
     MemB = [random.sample(range(0, 255), 4) for _ in range(16)]
     
     # realiza os calculos
-    sad = sad_V3(MemA, MemB)
+    sad_value = sad_v3(MemA, MemB)
     
     # converte a lista original para binario
     MemA_bin = [[format(x, '08b') for x in y] for y in MemA]
