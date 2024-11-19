@@ -24,7 +24,7 @@ def gera_estimulo(arquivo):
     
     for i in range(len(MemA_bin)):
         arquivo.write(''.join(MemA_bin[i]) + ' ' + ''.join(MemB_bin[i]) + ' ')
-    arquivo.write(format(sad, '014b') + '\n')
+    arquivo.write(format(sad_value, '014b') + '\n')
 
 # escreve em resultado.txt 50 vezes
 with open('estimulos.dat', 'w') as f:
