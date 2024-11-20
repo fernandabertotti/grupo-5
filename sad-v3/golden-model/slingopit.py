@@ -8,16 +8,13 @@ with open("estimulos.dat", "w") as file:
         sad_value = 0
         result = []
 
-        for i in range(16):
-            for j in range(4):
-                abs_value = abs(mem_A[i][j] - mem_B[i][j])
-                sad_value += abs_value
-            for amostra in mem_A[i]:
-                result.append(bin(amostra)[2:].zfill(8))
-            for amostra in mem_B[i]:
-                result.append(bin(amostra)[2:].zfill(8))
+        for row_A, row_B in zip(mem_A, mem_B):
+            for value_A, value_B in zip(row_A, row_B):
+                sad_value += abs(value_A - value_B)
+            result.extend(bin(value)[2:].zfill(8) for value in row_A)
+            result.extend(bin(value)[2:].zfill(8) for value in row_B)
+
         result.append(bin(sad_value)[2:].zfill(14))
 
         grouped_result = " ".join("".join(result[i:i + 4]) for i in range(0, len(result), 4))
-
-        file.write(grouped_result + "\n")  
+        file.write(grouped_result + "\n")
