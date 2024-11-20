@@ -29,9 +29,12 @@ begin
              sample_ori => mem_A, 
              sample_can => mem_B, 
              read_mem => read_mem, 
-             done => done,
              address => address, 
-             sad_value => sad_value);
+             sad_value => sad_value,
+				 done => done);
+	
+  clk <= not clk after periodo_clk/2; 
+  enable <= '1';
 				 
   stim: process is
     file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
@@ -49,8 +52,8 @@ begin
 				read(linha_de_estimulos, espaco);
 				read(linha_de_estimulos, valor_de_memB);
 				
-				Mem_A <= to_stdlogicvector(valor_de_memA);
-				Mem_B <= to_stdlogicvector(valor_de_memB);
+				mem_A <= to_stdlogicvector(valor_de_memA);
+				mem_B <= to_stdlogicvector(valor_de_memB);
 				
 				wait for periodo_clk*3;
 			end loop;
