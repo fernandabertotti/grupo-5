@@ -1,32 +1,23 @@
-import numpy as np
 import random
 
-def sad_v1(lista1, lista2):
-    return np.sum(np.abs(np.array(lista1) - np.array(lista2)))
+with open("estimulos.dat", "w") as file:  
+    for _ in range(50): #Escrever as 50 linhas de teste da SAD
+        mem_A = [[random.randint(0, 255) for _ in range(4)] for _ in range(16)] #Criar matriz mem_A
+        mem_B = [[random.randint(0, 255) for _ in range(4)] for _ in range(16)] #Criar matriz mem_B
 
-def sad_v3(lista1, lista2):
-    valor = 0
-    for i in range(len(lista1)):
-        valor += sad_v1(lista1[i], lista2[i])
-    return valor
+        sad_value = 0 #Zerar o valor de sad_value a cada linha de teste
+        result = [] #Lista para armazenar cada linha do arquivo de estímulos
 
-def gera_estimulo(arquivo):
-    # criação de listas com 4 números aleatórios de 8 bits
-    MemA = [random.sample(range(0, 255), 4) for _ in range(16)]
-    MemB = [random.sample(range(0, 255), 4) for _ in range(16)]
-    
-    # realiza os calculos
-    sad_value = sad_v3(MemA, MemB)
-    
-    # converte a lista original para binario
-    MemA_bin = [[format(x, '08b') for x in y] for y in MemA]
-    MemB_bin = [[format(x, '08b') for x in y] for y in MemB]
-    
-    for i in range(len(MemA_bin)):
-        arquivo.write(''.join(MemA_bin[i]) + ' ' + ''.join(MemB_bin[i]) + ' ')
-    arquivo.write(format(sad_value, '014b') + '\n')
+        #Percorrer as matrizes e realizar o cálculo da SAD, adicionando os valores na lista de resultados
+        for row_A, row_B in zip(mem_A, mem_B):
+            for value_A, value_B in zip(row_A, row_B):
+                sad_value += abs(value_A - value_B)
+            result.extend(bin(value)[2:].zfill(8) for value in row_A)
+            result.extend(bin(value)[2:].zfill(8) for value in row_B)
 
-# escreve em resultado.txt 50 vezes
-with open('estimulos.dat', 'w') as f:
-    for _ in range(50):
-        gera_estimulo(f)
+        #Adiciona último valor da lista que corresponde ao resultado esperado da SAD
+        result.append(bin(sad_value)[2:].zfill(14))
+
+        #Agrupa os valores de mem_A e mem_B tomados 4 a 4 e escreve no arquivo de estímulos
+        grouped_result = " ".join("".join(result[i:i + 4]) for i in range(0, len(result), 4))
+        file.write(grouped_result + "\n")
