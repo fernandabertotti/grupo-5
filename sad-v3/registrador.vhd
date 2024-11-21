@@ -14,7 +14,7 @@ architecture arch of registrador is
 begin
     process (rst,clk)
     begin
-        if (rst = '1') then --CONFIRMAR SE O RESET É ATIVO BAIXO OU NÃO
+        if (rst = '1') then 
             Q <= (others => '0');
         elsif (rising_edge(clk) and carga = '1') then
             Q <= D;
