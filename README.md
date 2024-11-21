@@ -26,7 +26,7 @@ Inicialmente, não foi possível verificar o funcionamento do circuito a partir 
 
 ![Mensagem de erro no ModelSim](https://github.com/user-attachments/assets/40944da7-74e4-46df-b3da-9c5f2b703bdf)
 
-Conforme orientação do professor, ao retirar o nome da arquitetura de DUV no arquivo testbench, a simulação funcionou e teve como resultado o teste finalizado. Assim, evidenciamos o correto funcionamento da SAD-V1.
+Conforme orientação do professor, ao retirar o nome da arquitetura de DUV no arquivo testbench, a simulação funcionou e não apresentou notificações de erro. Assim, evidenciamos o correto funcionamento da SAD-V1.
 
 ![image](https://github.com/user-attachments/assets/8ebfb1cd-ce48-4458-956c-5ed4d35db423)
 
@@ -34,7 +34,7 @@ Conforme orientação do professor, ao retirar o nome da arquitetura de DUV no a
 
 #### Circuito desenvolvido
 
-A arquitetura da SAD-V3 foi adequada da mesma forma que a SAD-V1, e obteve alterações nos mesmos campos no arquivo relatorio.json.
+A arquitetura da SAD-V3 foi adequada da mesma forma que a SAD-V1, com melhorias envolvendo o bloco operativo, o módulo absoluteDiff e o bloco de controle. Obteve alterações referentes à compilação nos mesmos campos que a SAD-V1, as quais constam no arquivo relatorio.json.
 
 #### Simulação
 
@@ -42,4 +42,4 @@ Para o teste da SAD-V3, foi gerado um arquivo estimulos.dat com um conjunto alea
 No entanto, o problema "Error loading design" permaneceu no ModelSim. A figura abaixo apresenta mais detalhes além da imagem anexada para a SAD-V1. 
 ![Mensagem de erro - SAD-V3](https://github.com/user-attachments/assets/056db99d-0a98-4649-a6ff-b138b8e3e600)
 
-Assim, não foi possível verificar o correto funcionamento dos testes.
+Ao retirar o nome da arquitetura do DUV no testbench, a simulação funcionou e mostrou que seriam necessárias alterações no testbench e no golden-model.
