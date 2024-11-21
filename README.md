@@ -14,7 +14,7 @@ Relatório da Atividade Prática III (AP3) de INE5406 em 2024.2.
 Tendo em vista os erros identificados na entrega anterior, foram desenvolvidas adaptações na arquitetura do circuito:
 
 - Retirada do arquivo subtractor_signed e utilização da função abs da biblioteca numeric_std para realização das diferenças absolutas com um bit a mais nas entradas no módulo absoluteDiff;
-- Inclusão do estado_atual na lista de sensibilidade do process do registrador, para gerar a lógica de transição entre os estados;
+- Inclusão do estado_atual na lista de sensibilidade do process do bloco de controle, para gerar a lógica de transição entre os estados;
 - Adequação do valor somado no acumulador de cont para 1, com uso da função to_unsigned, no bloco operativo.
 
 O efeito dessas mudanças consta nos dados do arquivo relatorio.json, que descreve um número menor, se comparado à entrega anterior, nos campos "total combinational funtions" e "Fmax".
@@ -42,7 +42,6 @@ Para o teste da SAD-V3, foi gerado um arquivo estimulos.dat com um conjunto alea
 No entanto, o problema "Error loading design" permaneceu no ModelSim. A figura abaixo apresenta mais detalhes além da imagem anexada para a SAD-V1. 
 ![Mensagem de erro - SAD-V3](https://github.com/user-attachments/assets/056db99d-0a98-4649-a6ff-b138b8e3e600)
 
-Ao retirar o nome da arquitetura do DUV no testbench, a simulação funcionou e mostrou que seriam necessárias alterações no testbench e no golden-model.
+Ao retirar o nome da arquitetura do DUV no testbench, a simulação funcionou e mostrou que seriam necessárias alterações no testbench e no golden-model. Assim, ao incluir a ativação do enable no testbench e a adequar o golden-model para escrever as 4 amostras de 8 bits de cada memória por vez, foi possível testar corretamente o circuito, e nenhuma mensagem de erro foi lançada, conforme mostra a imagem abaixo.
 
 ![image](https://github.com/user-attachments/assets/a2e04fd8-c15a-45f0-ba87-b43d60e0d4e4)
-
