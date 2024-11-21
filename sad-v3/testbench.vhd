@@ -34,7 +34,6 @@ begin
 				 done => done);
 	
   clk <= not clk after periodo_clk/2; 
-  enable <= '1';
 				 
   stim: process is
     file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
@@ -46,6 +45,11 @@ begin
     begin
 
    while not endfile(arquivo_de_estimulos) loop
+			
+			enable <= '1';
+			wait for periodo_clk*2;
+			enable <= '0';
+			
 			readline(arquivo_de_estimulos, linha_de_estimulos);
 			for i in 1 to 16 loop
 				read(linha_de_estimulos, valor_de_memA);
@@ -62,7 +66,7 @@ begin
 			wait for periodo_clk*3;
 			assert (sad_value = to_stdlogicvector(valor_de_saida))
 			report
-			"Sad incorreta! "
+			"Erro no cálculo da SAD."
 			severity error;
 		end loop;
 
