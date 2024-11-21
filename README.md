@@ -45,3 +45,6 @@ No entanto, o problema "Error loading design" permaneceu no ModelSim. A figura a
 Ao retirar o nome da arquitetura do DUV no testbench, a simulação funcionou e mostrou que seriam necessárias alterações no testbench e no golden-model. Assim, ao incluir a ativação do enable no testbench e a adequar o golden-model para escrever as 4 amostras de 8 bits de cada memória por vez, foi possível testar corretamente o circuito, e nenhuma mensagem de erro foi lançada, conforme mostra a imagem abaixo.
 
 ![image](https://github.com/user-attachments/assets/a2e04fd8-c15a-45f0-ba87-b43d60e0d4e4)
+
+
+
