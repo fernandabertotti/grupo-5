@@ -43,3 +43,6 @@ No entanto, o problema "Error loading design" permaneceu no ModelSim. A figura a
 ![Mensagem de erro - SAD-V3](https://github.com/user-attachments/assets/056db99d-0a98-4649-a6ff-b138b8e3e600)
 
 Ao retirar o nome da arquitetura do DUV no testbench, a simulação funcionou e mostrou que seriam necessárias alterações no testbench e no golden-model.
+
+![image](https://github.com/user-attachments/assets/a2e04fd8-c15a-45f0-ba87-b43d60e0d4e4)
+
