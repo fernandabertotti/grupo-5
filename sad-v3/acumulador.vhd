@@ -22,7 +22,7 @@ begin
 		generic map (N => N)
 		port map(
   			F1 => adder_out,
-  			F2 => to_unsigned(16, adder_out'length), --CONFIRMAR COMO VAI FICAR PRO CONTADOR
+  			F2 => (others => '0'),
   			sel => sel_mux,
   			F => mux_out
 			);
