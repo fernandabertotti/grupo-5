@@ -12,7 +12,6 @@ port(
 end acumulador;
 
 architecture arch of acumulador is
-  signal mux_in0: std_logic_vector(N-1 downto 0); -- entrada do multiplexador quando seletor é 0
   signal mux_out: std_logic_vector(N-1 downto 0); -- saída do multiplexador
   signal reg_in: std_logic_vector(N-1 downto 0); -- entrada do registrador
   signal valor_ja_acumulado: std_logic_vector(N-1 downto 0); -- saída do registrador
@@ -23,7 +22,7 @@ begin
 		generic map (N => N)
 		port map(
   			F1 => adder_out,
-  			F2 => (others => '0'),
+  			F2 => to_unsigned(16, adder_out'length), --CONFIRMAR COMO VAI FICAR PRO CONTADOR
   			sel => sel_mux,
   			F => mux_out
 			);
